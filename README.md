@@ -17,10 +17,25 @@ Please refer to the `Getting started` link for instructions on setting up the to
 - Dependencies and environmental requirements will be listed here.
 
 ## Installation
-- Step-by-step guide on setting up the development environment and installing the tool.
+
+```
+cd hydra-ui
+npm install
+
+cd hydra-service
+npm install
+```
 
 ## Usage
-- Instructions on how to utilize the tool will be provided here.
+```
+cd hydra-ui
+npm start
+
+cd hydra-service
+npm start
+```
+Visit the server under localhost:3000 (Frontend)
+Visit the server under localhost:4000 (Backend)
 
 ## Contributing
 We welcome contributions. Please read `CONTRIBUTING.md` for details on our code of conduct and the process for submitting pull requests to us.
