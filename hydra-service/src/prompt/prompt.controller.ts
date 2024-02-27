@@ -9,7 +9,7 @@ export class PromptController {
   @Post()
   async receiveStringAndProcess(@Body() body: CreateMessageDto): Promise<any> {
     console.log('Received string from frontend:', body.message);
-    const llmResponse = await this.promptService.sendToLLM(body.message);
+    const llmResponse = await this.promptService.analyzeText(body.message);
     return llmResponse;
   }
 }
