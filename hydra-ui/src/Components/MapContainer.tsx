@@ -66,6 +66,15 @@ const MapContainer = ({source, target}: any) => {
                         options={{polylineOptions: {strokeColor: getColor(index)}}}
                     />
                 ))}
+                {target.lat > 51 && target.lat < 52 && target.lng > -0.5 && target.lng < 0 && <Marker
+                  position={{lat: 51.5374, lng: -0.1378}} // Coordinates for London
+                  title="London, UK - Brexit is a considered risk"
+                  label="RISK"
+                  icon={{
+                      url: 'http://maps.google.com/mapfiles/ms/icons/black-dot.png',
+                      scaledSize: new window.google.maps.Size(32, 32),
+                  }}
+                />}
 
                 <Marker
                     position={{lat: 39.7392, lng: -104.9903}}
