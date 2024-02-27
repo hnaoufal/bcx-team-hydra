@@ -9,3 +9,9 @@ G
 hydra-service/README.md,c/4/c4eca9c41c578ef28c26d2d0e29f5838323a1a92
 B
 hydra-ui/README.md,d/1/d18e0039cc767a4da3e00af5b742e9706c7cd82b
+O
+hydra-service/src/app.module.ts,3/2/32f9d65eb9c819963d9e0970dc1a61b95ebe9d63
+S
+#hydra-service/src/app.controller.ts,6/e/6ed43c0e1418b0aa7ccf53f6d3ea98ecf18bb68d
+]
+-hydra-service/src/prompt/prompt.controller.ts,d/8/d856875f902319ee2fc47f074d341ce9c06ad424
