@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {DirectionsRenderer, GoogleMap, Marker, useJsApiLoader} from '@react-google-maps/api';
+import {DirectionsRenderer, GoogleMap, Marker, useJsApiLoader, InfoWindow} from '@react-google-maps/api';
 const MapContainer = ({source, target}: any) => {
     const mapStyles = {
         height: '70vh',
@@ -20,6 +20,7 @@ const MapContainer = ({source, target}: any) => {
             lat: 39.7392,
             lng: -104.9903,
           },
+          risk: 'Possible dangerous weather phenomenon',
         },
         {
             name: 'Las Vegas, NV',
@@ -27,11 +28,25 @@ const MapContainer = ({source, target}: any) => {
                 lat: 36.1699,
                 lng: -115.1398,
             },
+            risk: 'Road closed because of construction',
         },
         // Add more locations as needed
       ];
     const [routes, setRoutes] = useState<any[]>([]);
-    const [markers, setMarkers] = useState<JSX.Element[]>([]);
+    const [markers, setMarkers] = useState<any[]>([]);
+    const [activeMarker, setActiveMarker] = useState<number>(0);
+    const [showInfoWindow, setShowInfoWindow] = useState<boolean>(false);
+
+  const onMarkerClick = (index: number) => {
+    setActiveMarker(index);
+    setShowInfoWindow(true);
+  };
+
+  const onCloseInfoWindow = () => {
+    setActiveMarker(0);
+    setShowInfoWindow(false);
+  };
+
     const directionsCallback = (result: any, status: any) => {
         if (status === 'OK') {
             setRoutes((prevRoutes) => [...prevRoutes, result]);
@@ -39,6 +54,8 @@ const MapContainer = ({source, target}: any) => {
             console.error(`Directions request failed due to ${status}`);
         }
     };
+
+
     useEffect(() => {
         if (isLoaded) {
             try {
@@ -67,9 +84,11 @@ const MapContainer = ({source, target}: any) => {
                             url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
                             scaledSize: new window.google.maps.Size(32, 32),
                         }}
+                        onClick={() => onMarkerClick(index)}
                     />
                 ));
                 setMarkers((prevMarkers) => [...prevMarkers, ...newMarkers]);
+
             } catch (error) {
                 console.error('Error loading or processing directions:', error);
             }
@@ -89,7 +108,22 @@ const MapContainer = ({source, target}: any) => {
                         options={{polylineOptions: {strokeColor: getColor(index)}}}
                     />
                 ))}
+                <div>
                 {markers}
+                {showInfoWindow && (
+                    <InfoWindow
+                    position={locations[activeMarker].location}
+                    onCloseClick={onCloseInfoWindow}
+                    >
+                    <div>
+                        <h1>Info about <b>{locations[activeMarker].name}</b></h1>
+                        <p>{locations[activeMarker].risk}</p>
+                        {/* Add your information here */}
+                    </div>
+                    </InfoWindow>
+                )}
+                </div>
+
             </GoogleMap>
         ) : <></>
     );
