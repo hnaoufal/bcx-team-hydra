@@ -23,7 +23,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "cross-env .env && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@types/react-chartjs-2": "^2.5.7",
+    "cross-env": "^7.0.3",
     "tailwindcss": "^3.4.1"
   }
 }
