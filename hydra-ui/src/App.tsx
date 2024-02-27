@@ -22,7 +22,17 @@ import RiskInfoPanel from "./components/RiskInfoPanel";
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
+// new window.google.maps.LatLng(34.0522, -118.2437), // Los Angeles, CA
+// new window.google.maps.LatLng(37.7749, -122.4194), // San Francisco, CA
 const context = {
+    source: {
+        lat: 34.0522,
+        lng: -118.2437,
+    },
+    target: {
+        lat: 37.7749,
+        lng: -122.4194,
+    },
     radar: {
         labels: ['Energy', 'Risk', 'Economic Stability', 'Social Responsibility', 'Regulatory & Comp.', 'Distance', 'Success'],
         datasets: [
@@ -70,7 +80,24 @@ const context = {
         "Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.",
         "Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.",
 
-    ]
+    ],
+    riskData: {
+        riskName: "Flood Risk",
+        riskCategory: "Environment",
+        description: "Potential flooding due to heavy rainfall.",
+        risks: [
+            "Water damage to property",
+            "Disruption of transport routes",
+            "Increased risk of landslides"
+        ],
+        recommendations: "Evacuate flood-prone areas, secure belongings, and stay informed through local news.",
+        actions: [
+            "Check emergency kits",
+            "Review evacuation routes",
+            "Subscribe to weather alerts",
+            "Secure outdoor objects"
+        ]
+    }
 }
 
 const options = {
@@ -93,23 +120,6 @@ const GoogleMapPlaceholder = () => (
     </div>
 );
 
-const riskData = {
-    riskName: "Flood Risk",
-    riskCategory: "Environment",
-    description: "Potential flooding due to heavy rainfall.",
-    risks: [
-        "Water damage to property",
-        "Disruption of transport routes",
-        "Increased risk of landslides"
-    ],
-    recommendations: "Evacuate flood-prone areas, secure belongings, and stay informed through local news.",
-    actions: [
-        "Check emergency kits",
-        "Review evacuation routes",
-        "Subscribe to weather alerts",
-        "Secure outdoor objects"
-    ]
-};
 
 function App() {
     const count = useSelector((state: any) => state.counter.value);
@@ -121,7 +131,7 @@ function App() {
             {/* Static Side Panel */}
             <div className="w-1/5 bg-gray-800 text-white p-4">
                 <h1 className="text-lg font-bold">Risk Info</h1>
-                <RiskInfoPanel {...riskData} />
+                <RiskInfoPanel {...context.riskData} />
 
             </div>
 
@@ -166,7 +176,7 @@ function App() {
                             {/* Action items here */}
                         </div>
 
-                        <MapContainer/>
+                        <MapContainer source={context.source} target={context.target}/>
 
                         {/* Content Sections */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
@@ -174,9 +184,9 @@ function App() {
                             <div className="bg-gray-100 p-4 rounded-md shadow-lg">
                                 <h2 className="font-bold mb-2">News Feed</h2>
                                 <ul className="list-disc pl-5">
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                    <li>Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</li>
-                                    <li>Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.</li>
+                                    {context.newsFeed.map((item, index) => (
+                                        <li key={index} className="text-gray-700 text-base">{item}</li>
+                                    ))}
                                 </ul>
                             </div>
 
