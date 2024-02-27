@@ -1,8 +1,52 @@
 import React from 'react';
 import logo from './assets/logo.png';
 import './App.css';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, RadialLinearScale, PointElement, LineElement, Filler } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import { Radar } from 'react-chartjs-2';
+import RiskInfoPanel from "./components/RiskInfoPanel";
+
+ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
+
+const radarData = {
+    labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
+    datasets: [
+        {
+            label: 'Person A',
+            data: [65, 59, 90, 81, 56, 55, 40],
+            fill: true,
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(255, 99, 132, 1)',
+        },
+        {
+            label: 'Person B',
+            data: [28, 48, 40, 19, 96, 27, 100],
+            fill: true,
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(54, 162, 235, 1)',
+        }
+    ],
+};
+
+const options = {
+    elements: {
+        line: {
+            borderWidth: 3
+        }
+    }
+};
+
+const RadarChartComponent = () => {
+    return <Radar data={data} options={options} />;
+};
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 const data = {
@@ -39,13 +83,32 @@ const GoogleMapPlaceholder = () => (
     </div>
 );
 
+const riskData = {
+    riskName: "Flood Risk",
+    riskCategory: "Environment",
+    description: "Potential flooding due to heavy rainfall.",
+    risks: [
+        "Water damage to property",
+        "Disruption of transport routes",
+        "Increased risk of landslides"
+    ],
+    recommendations: "Evacuate flood-prone areas, secure belongings, and stay informed through local news.",
+    actions: [
+        "Check emergency kits",
+        "Review evacuation routes",
+        "Subscribe to weather alerts",
+        "Secure outdoor objects"
+    ]
+};
+
 function App() {
     return (
         <div className="flex h-screen">
             {/* Static Side Panel */}
             <div className="w-1/5 bg-gray-800 text-white p-4">
-                <h1 className="text-lg font-bold">Side Panel</h1>
-                {/* Add your side panel content here */}
+                <h1 className="text-lg font-bold">Risk Info</h1>
+                <RiskInfoPanel {...riskData} />
+
             </div>
 
             {/* Main Content */}
@@ -99,10 +162,7 @@ function App() {
                             {/* Analysis */}
                             <div className="bg-gray-100 p-4 rounded-md shadow-lg">
                                 <h2 className="font-bold mb-2">Analysis</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse
-                                    lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras
-                                    elementum ultrices diam.</p>
-
+                                <RadarChartComponent />
                             </div>
 
                             {/* Report */}
