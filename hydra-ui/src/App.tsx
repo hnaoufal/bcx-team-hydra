@@ -59,7 +59,7 @@ const options = {
 };
 
 const RadarChartComponent = () => {
-    return <Radar data={data} options={options}/>;
+    return <Radar data={radarData} options={options}/>;
 };
 
 ChartJS.register(ArcElement, Tooltip, Legend);
