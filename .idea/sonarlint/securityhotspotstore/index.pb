@@ -15,3 +15,9 @@ S
 #hydra-service/src/app.controller.ts,6/e/6ed43c0e1418b0aa7ccf53f6d3ea98ecf18bb68d
 ]
 -hydra-service/src/prompt/prompt.controller.ts,d/8/d856875f902319ee2fc47f074d341ce9c06ad424
+K
+hydra-ui/tailwind.config.js,3/6/36335a47d007d41e1888c395792a4bb62d4c8d1d
+F
+hydra-ui/src/index.css,1/8/1899f49778da6fd90c9ba91826cbfd0846070807
+D
+hydra-ui/src/App.tsx,a/8/a8dd94c6937b96ea91aad2a891df97a37b80e382
