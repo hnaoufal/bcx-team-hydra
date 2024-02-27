@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './assets/logo.png';
 import './App.css';
+import MapContainer from './Components/MapContainer';
 
 const GoogleMapPlaceholder = () => (
         <div className="w-full bg-gray-300 flex items-center justify-center" style={{height: '75vh'}}>
@@ -52,7 +53,8 @@ const GoogleMapPlaceholder = () => (
                     </div>
 
                     {/* Google Map */}
-                    <GoogleMapPlaceholder/>
+                    <MapContainer/>
+                    {/* <GoogleMapPlaceholder/> */}
 
                     {/* Content Sections */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
