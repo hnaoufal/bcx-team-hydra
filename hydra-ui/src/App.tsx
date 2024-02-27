@@ -3,83 +3,118 @@ import logo from './assets/logo.png';
 import './App.css';
 import MapContainer from './Components/MapContainer';
 
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+const data = {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [
+        {
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+            ],
+            borderWidth: 1,
+        },
+    ],
+};
+
 const GoogleMapPlaceholder = () => (
-        <div className="w-full bg-gray-300 flex items-center justify-center" style={{height: '75vh'}}>
-            <span>Google Map Placeholder</span>
-        </div>
-        );
+    <div className="w-full bg-gray-300 flex items-center justify-center" style={{height: '75vh'}}>
+        <span>Google Map Placeholder</span>
+    </div>
+);
 
-        function App() {
-        return (
+function App() {
+    return (
         <div className="flex h-screen">
-    {/* Static Side Panel */}
-        <div className="w-1/5 bg-gray-800 text-white p-4">
-            <h1 className="text-lg font-bold">Side Panel</h1>
-            {/* Add your side panel content here */}
-        </div>
+            {/* Static Side Panel */}
+            <div className="w-1/5 bg-gray-800 text-white p-4">
+                <h1 className="text-lg font-bold">Side Panel</h1>
+                {/* Add your side panel content here */}
+            </div>
 
-        {/* Main Content */}
-        <div className="w-4/5 overflow-auto">
-            <nav className="bg-white p-4 flex justify-between items-center">
-                {/* Logo on the left */}
-                <div className="flex items-center">
-                    <div className="h-8 w-8 mr-2"><img src={logo}/></div>
-                    <span className="font-semibold text-xl">Hydra</span>
-                </div>
-
-                {/* Search bar in the center */}
-                <div className="flex-grow mx-4">
-                    <input
-                        className="w-full p-2 rounded-md"
-                        type="text"
-                        placeholder="Search..."
-                    />
-                </div>
-
-                {/* Account icon on the right */}
-                <div>
-                    <button className="flex items-center">
-                        <div className="h-6 w-6">👤</div>
-                    </button>
-                </div>
-            </nav>
-            {/* Add your main content here. This part is scrollable if the content overflows. */}
-            <div className="space-y-4">
-                <div className="flex flex-col">
-                    {/* Action Bar */}
-                    <div className="p-4 bg-gray-800 text-white">
-                        <h1 className="text-lg">Action Bar</h1>
-                        {/* Action items here */}
+            {/* Main Content */}
+            <div className="w-4/5 overflow-auto">
+                <nav className="bg-white p-4 flex justify-between items-center">
+                    {/* Logo on the left */}
+                    <div className="flex items-center">
+                        <div className="h-8 w-8 mr-2"><img src={logo} /></div>
+                        <span className="font-semibold text-xl">Hydra</span>
                     </div>
 
-                    {/* Google Map */}
+                    {/* Search bar in the center */}
+                    <div className="flex-grow mx-4">
+                        <input
+                            className="w-full p-2 rounded-md"
+                            type="text"
+                            placeholder="Search..."
+                        />
+                    </div>
+
+                    {/* Account icon on the right */}
+                    <div>
+                        <button className="flex items-center">
+                            <div className="h-6 w-6">👤</div>
+                        </button>
+                    </div>
+                </nav>
+                {/* Add your main content here. This part is scrollable if the content overflows. */}
+                <div className="space-y-4">
+                    <div className="flex flex-col">
+                        {/* Action Bar */}
+                        <div className="p-4 bg-gray-800 text-white">
+                            <h1 className="text-lg">Action Bar</h1>
+                            {/* Action items here */}
+                        </div>
+
                     <MapContainer/>
-                    {/* <GoogleMapPlaceholder/> */}
 
-                    {/* Content Sections */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
-                        {/* News Feed */}
-                        <div className="bg-gray-100 p-4 rounded-md shadow-lg">
-                            <h2 className="font-bold mb-2">News Feed</h2>
-                            {/* News feed content */}
-                        </div>
+                        {/* Content Sections */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
+                            {/* News Feed */}
+                            <div className="bg-gray-100 p-4 rounded-md shadow-lg">
+                                <h2 className="font-bold mb-2">News Feed</h2>
+                                <ul className="list-disc pl-5">
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                    <li>Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</li>
+                                    <li>Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.</li>
+                                </ul>                            </div>
 
-                        {/* Analysis */}
-                        <div className="bg-gray-100 p-4 rounded-md shadow-lg">
-                            <h2 className="font-bold mb-2">Analysis</h2>
-                            {/* Analysis content */}
-                        </div>
+                            {/* Analysis */}
+                            <div className="bg-gray-100 p-4 rounded-md shadow-lg">
+                                <h2 className="font-bold mb-2">Analysis</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse
+                                    lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras
+                                    elementum ultrices diam.</p>
 
-                        {/* Report */}
-                        <div className="bg-gray-100 p-4 rounded-md shadow-lg">
-                            <h2 className="font-bold mb-2">Report</h2>
-                            {/* Report content */}
+                            </div>
+
+                            {/* Report */}
+                            <div className="bg-gray-100 p-4 rounded-md shadow-lg">
+                                <h2 className="font-bold mb-2">Report</h2>
+                                <Doughnut data={data} />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>);
+        </div>);
 }
 
 export default App;
