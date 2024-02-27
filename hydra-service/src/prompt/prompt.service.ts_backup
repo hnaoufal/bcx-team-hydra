@@ -1,0 +1,64 @@
+import {Injectable} from '@nestjs/common';
+import {IamAuthenticator} from 'ibm-watson/auth';
+import NaturalLanguageUnderstandingV1 = require('ibm-watson/natural-language-understanding/v1');
+
+// import NaturalLanguageUnderstandingV1 from 'ibm-watson/natural-language-understanding/v1';
+
+@Injectable()
+export class PromptService {
+    private nlu: NaturalLanguageUnderstandingV1;
+
+    constructor() {
+        console.log('IBM Watson API Key:', process.env.WATSON_API_KEY);
+        console.log('IBM Watson Service URL:', process.env.WATSON_SERVICE_URL);
+
+        this.nlu = new NaturalLanguageUnderstandingV1({
+            version: '2021-08-01',
+            authenticator: new IamAuthenticator({
+                apikey: process.env.WATSON_API_KEY,
+            }),
+            serviceUrl: process.env.WATSON_SERVICE_URL,
+        });
+    }
+
+    async analyzeText(text: string): Promise<any> {
+        const analyzeParams = {
+            text: text,
+            features: {
+                entities: {sentiment: true, limit: 1},
+                keywords: {sentiment: true, limit: 1},
+            },
+        };
+
+        try {
+            const analysisResults = await this.nlu.analyze(analyzeParams);
+            console.log(JSON.stringify(analysisResults.result, null, 2));
+            return analysisResults.result; // Adjust according to the expected structure
+        } catch (err) {
+            console.error('error:', err);
+            throw new Error(
+                'Failed to analyze text with Watson Natural Language Understanding',
+            );
+        }
+    }
+}
+
+// import { Injectable } from '@nestjs/common';
+
+// @Injectable()
+// export class PromptService {
+//   async sendToLLM(input: string): Promise<any> {
+//     console.log('Sending to IBM LLM service:', input);
+//     let llmResponse;
+//     if (input.includes('risk')) {
+//       llmResponse = { level: 'High', details: 'Details about risk' };
+//     } else if (input.includes('country')) {
+//       llmResponse = { name: 'CountryName', info: 'Information about country' };
+//     } else if (input.includes('route')) {
+//       llmResponse = { path: 'RoutePath', details: 'Details about route' };
+//     } else {
+//       llmResponse = { error: 'Unrecognized prompt' };
+//     }
+//     return llmResponse;
+//   }
+// }
