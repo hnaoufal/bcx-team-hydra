@@ -22,33 +22,56 @@ import RiskInfoPanel from "./components/RiskInfoPanel";
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
-const radarData = {
-    labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
-    datasets: [
-        {
-            label: 'Person A',
-            data: [65, 59, 90, 81, 56, 55, 40],
-            fill: true,
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            pointBackgroundColor: 'rgba(255, 99, 132, 1)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(255, 99, 132, 1)',
-        },
-        {
-            label: 'Person B',
-            data: [28, 48, 40, 19, 96, 27, 100],
-            fill: true,
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            pointBackgroundColor: 'rgba(54, 162, 235, 1)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(54, 162, 235, 1)',
-        }
-    ],
-};
+const context = {
+    radar: {
+        labels: ['Energy', 'Risk', 'Economic Stability', 'Social Responsibility', 'Regulatory & Comp.', 'Distance', 'Success'],
+        datasets: [
+            {
+                label: 'Risk',
+                data: [65, 59, 90, 81, 56, 55, 40],
+                fill: true,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(255, 99, 132, 1)',
+            },
+        ],
+    },
+    donut: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [
+            {
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                ],
+                borderWidth: 1,
+            },
+        ],
+    },
+    newsFeed: [
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.",
+        "Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.",
+
+    ]
+}
 
 const options = {
     elements: {
@@ -59,36 +82,10 @@ const options = {
 };
 
 const RadarChartComponent = () => {
-    return <Radar data={radarData} options={options}/>;
+    return <Radar data={context.radar} options={options}/>;
 };
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-const data = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    datasets: [
-        {
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-            ],
-            borderWidth: 1,
-        },
-    ],
-};
 
 const GoogleMapPlaceholder = () => (
     <div className="w-full bg-gray-300 flex items-center justify-center" style={{height: '75vh'}}>
@@ -192,7 +189,7 @@ function App() {
                             {/* Report */}
                             <div className="bg-gray-100 p-4 rounded-md shadow-lg">
                                 <h2 className="font-bold mb-2">Report</h2>
-                                <Doughnut data={data}/>
+                                <Doughnut data={context.donut}/>
                             </div>
                         </div>
                     </div>
