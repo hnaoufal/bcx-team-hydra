@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './assets/logo.png';
 import './App.css';
+import MapContainer from './Components/MapContainer';
+
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
@@ -31,7 +33,6 @@ const data = {
         },
     ],
 };
-
 
 const GoogleMapPlaceholder = () => (
     <div className="w-full bg-gray-300 flex items-center justify-center" style={{height: '75vh'}}>
@@ -82,8 +83,7 @@ function App() {
                             {/* Action items here */}
                         </div>
 
-                        {/* Google Map */}
-                        <GoogleMapPlaceholder/>
+                    <MapContainer/>
 
                         {/* Content Sections */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
