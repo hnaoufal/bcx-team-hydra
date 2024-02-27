@@ -17,7 +17,26 @@ const MapContainer = () => {
         lng: -100.45039367675781
     };
 
+	const locations = [
+		{
+		  name: 'Devnver, CO',
+		  location: {
+			lat: 39.7392,
+			lng: -104.9903,
+		  },
+		},
+		{
+			name: 'Las Vegas, NV',
+			location: {
+				lat: 36.1699,
+				lng: -115.1398,
+			},
+		},
+		// Add more locations as needed
+	  ];
+
     const [routes, setRoutes] = useState<any[]>([]);
+	const [markers, setMarkers] = useState<JSX.Element[]>([]);
 
     const directionsCallback = (result: any, status: any) => {
         if (status === 'OK') {
@@ -49,6 +68,19 @@ const MapContainer = () => {
                         (result, status) => directionsCallback(result, status)
                     );
                 });
+
+				const newMarkers = locations.map((location, index) => (
+                    <Marker
+                        key={index}
+                        position={location.location}
+                        icon={{
+                            url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                            scaledSize: new window.google.maps.Size(32, 32),
+                        }}
+                    />
+                ));
+
+                setMarkers((prevMarkers) => [...prevMarkers, ...newMarkers]);
             } catch (error) {
                 console.error('Error loading or processing directions:', error);
             }
@@ -69,6 +101,8 @@ const MapContainer = () => {
                     options={{polylineOptions: {strokeColor: getColor(index)}}}
                 />
             ))}
+
+			{markers}
             <Marker
                 position={defaultCenter}
                 title="My location"
