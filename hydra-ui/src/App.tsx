@@ -1,11 +1,23 @@
 import React from 'react';
 import logo from './assets/logo.png';
 import './App.css';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, RadialLinearScale, PointElement, LineElement, Filler } from "chart.js";
+import {
+    ArcElement,
+    Chart as ChartJS,
+    Filler,
+    Legend,
+    LineElement,
+    PointElement,
+    RadialLinearScale,
+    Tooltip
+} from "chart.js";
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchTextData} from './features/prompt/promptSlice';
+
+
 import MapContainer from './components/MapContainer';
 
-import { Doughnut } from "react-chartjs-2";
-import { Radar } from 'react-chartjs-2';
+import {Doughnut, Radar} from "react-chartjs-2";
 import RiskInfoPanel from "./components/RiskInfoPanel";
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
@@ -47,7 +59,7 @@ const options = {
 };
 
 const RadarChartComponent = () => {
-    return <Radar data={data} options={options} />;
+    return <Radar data={data} options={options}/>;
 };
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -103,6 +115,10 @@ const riskData = {
 };
 
 function App() {
+    const count = useSelector((state: any) => state.counter.value);
+    const [prompt, setPrompt] = React.useState('');
+    const dispatch = useDispatch();
+
     return (
         <div className="flex h-screen">
             {/* Static Side Panel */}
@@ -117,19 +133,26 @@ function App() {
                 <nav className="bg-white p-4 flex justify-between items-center">
                     {/* Logo on the left */}
                     <div className="flex items-center">
-                        <div className="h-8 w-8 mr-2"><img src={logo} /></div>
+                        <div className="h-8 w-8 mr-2"><img src={logo}/></div>
                         <span className="font-semibold text-xl">Hydra</span>
                     </div>
 
                     {/* Search bar in the center */}
-                    <div className="flex-grow mx-4">
+                    <div className="flex-grow mx-4 flex items-center space-x-2">
                         <input
-                            className="w-full p-2 rounded-md"
+                            className="flex-grow p-2 rounded-md border border-gray-300"
                             type="text"
+                            value={prompt}
+                            onChange={(e) => setPrompt(e.target.value)}
                             placeholder="Search..."
                         />
+                        <button
+                            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                            onClick={() => dispatch(fetchTextData(prompt) as any)}
+                        >
+                            Send
+                        </button>
                     </div>
-
                     {/* Account icon on the right */}
                     <div>
                         <button className="flex items-center">
@@ -146,7 +169,7 @@ function App() {
                             {/* Action items here */}
                         </div>
 
-                    <MapContainer/>
+                        <MapContainer/>
 
                         {/* Content Sections */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
@@ -157,18 +180,19 @@ function App() {
                                     <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
                                     <li>Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</li>
                                     <li>Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.</li>
-                                </ul>                            </div>
+                                </ul>
+                            </div>
 
                             {/* Analysis */}
                             <div className="bg-gray-100 p-4 rounded-md shadow-lg">
                                 <h2 className="font-bold mb-2">Analysis</h2>
-                                <RadarChartComponent />
+                                <RadarChartComponent/>
                             </div>
 
                             {/* Report */}
                             <div className="bg-gray-100 p-4 rounded-md shadow-lg">
                                 <h2 className="font-bold mb-2">Report</h2>
-                                <Doughnut data={data} />
+                                <Doughnut data={data}/>
                             </div>
                         </div>
                     </div>

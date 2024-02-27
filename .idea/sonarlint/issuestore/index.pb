@@ -25,3 +25,13 @@ Y
 )hydra-ui/src/components/RiskInfoPanel.tsx,1/f/1f38a44d2ce59848809532cf8f7ed71a037143f0
 X
 (hydra-ui/src/components/MapContainer.tsx,7/e/7e09ef284c22dd3a0292bf0059ba8d7559f6a138
+K
+hydra-ui/src/store/store.ts,7/4/74081856c7a5739a8e2673a8a014b308fe93db64
+F
+hydra-ui/src/index.tsx,5/9/598a4b09b5698572ada375282da89e47ee9c8782
+\
+,hydra-ui/src/features/prompt/counterSlice.ts,0/a/0abdeef47fc37174b92b4e5563d3455f8d3b6525
+[
++hydra-ui/src/features/prompt/promptSlice.ts,3/1/313cab9f6afbb72d6c9d103f73dedf366eaea3c7
+E
+hydra-ui/package.json,6/8/68912a9c1ad0e45b9c1287efee8b09581a9cfd5b
