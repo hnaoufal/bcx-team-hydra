@@ -23,3 +23,5 @@ D
 hydra-ui/src/App.tsx,a/8/a8dd94c6937b96ea91aad2a891df97a37b80e382
 Y
 )hydra-ui/src/components/RiskInfoPanel.tsx,1/f/1f38a44d2ce59848809532cf8f7ed71a037143f0
+X
+(hydra-ui/src/components/MapContainer.tsx,7/e/7e09ef284c22dd3a0292bf0059ba8d7559f6a138

@@ -2,6 +2,8 @@ import React from 'react';
 import logo from './assets/logo.png';
 import './App.css';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, RadialLinearScale, PointElement, LineElement, Filler } from "chart.js";
+import MapContainer from './components/MapContainer';
+
 import { Doughnut } from "react-chartjs-2";
 import { Radar } from 'react-chartjs-2';
 import RiskInfoPanel from "./components/RiskInfoPanel";
@@ -76,7 +78,6 @@ const data = {
     ],
 };
 
-
 const GoogleMapPlaceholder = () => (
     <div className="w-full bg-gray-300 flex items-center justify-center" style={{height: '75vh'}}>
         <span>Google Map Placeholder</span>
@@ -145,8 +146,7 @@ function App() {
                             {/* Action items here */}
                         </div>
 
-                        {/* Google Map */}
-                        <GoogleMapPlaceholder/>
+                    <MapContainer/>
 
                         {/* Content Sections */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
