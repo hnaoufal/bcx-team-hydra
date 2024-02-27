@@ -1,6 +1,37 @@
 import React from 'react';
 import logo from './assets/logo.png';
 import './App.css';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+const data = {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [
+        {
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+            ],
+            borderWidth: 1,
+        },
+    ],
+};
+
 
 const GoogleMapPlaceholder = () => (
     <div className="w-full bg-gray-300 flex items-center justify-center" style={{height: '75vh'}}>
@@ -59,19 +90,25 @@ function App() {
                             {/* News Feed */}
                             <div className="bg-gray-100 p-4 rounded-md shadow-lg">
                                 <h2 className="font-bold mb-2">News Feed</h2>
-                                {/* News feed content */}
-                            </div>
+                                <ul className="list-disc pl-5">
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                    <li>Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</li>
+                                    <li>Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.</li>
+                                </ul>                            </div>
 
                             {/* Analysis */}
                             <div className="bg-gray-100 p-4 rounded-md shadow-lg">
                                 <h2 className="font-bold mb-2">Analysis</h2>
-                                {/* Analysis content */}
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse
+                                    lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras
+                                    elementum ultrices diam.</p>
+
                             </div>
 
                             {/* Report */}
                             <div className="bg-gray-100 p-4 rounded-md shadow-lg">
                                 <h2 className="font-bold mb-2">Report</h2>
-                                {/* Report content */}
+                                <Doughnut data={data} />
                             </div>
                         </div>
                     </div>
