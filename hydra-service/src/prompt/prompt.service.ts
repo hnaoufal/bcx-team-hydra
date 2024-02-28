@@ -45,14 +45,21 @@ Based on above JSON create a new JSON and fill in the properties with use-cases 
 async function queryOpenAI(prompt: string): Promise<string> {
     const openai = new OpenAI({
         apiKey: process.env.OPENAI_API_KEY,
-        baseURL: "https://llms.azurewebsites.net"
+        baseURL: "https://llms.azurewebsites.net",
+        defaultHeaders: {
+            "Content-Type": "application/json",
+        }
     });
 
     const chatCompletion = await openai.chat.completions.create({
         messages: [
             {
+                role: 'system',
+                content: `${contextReal}`,
+            },
+            {
                 role: 'user',
-                content: `${contextReal} prompt`,
+                content: prompt,
             },
         ],
         model: 'gpt-4',
