@@ -51,3 +51,5 @@ a
 1hydra-service/src/prompt/prompt.service.ts_backup,9/b/9bfc930f243a33d1bdcc627ab75424fa90d83380
 ƒ
 Shydra-service/node_modules/@google-cloud/vertexai/src/functions/generate_content.ts,4/8/48b3464ee4aafdae3a7ade0384413a6ce75e6d37
+J
+hydra-ui/public/index.html,a/e/ae0980052311b64e6be680317ecc661a07b0d8c6

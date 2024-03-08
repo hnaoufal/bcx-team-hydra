@@ -1,20 +1,81 @@
-// import { Injectable } from '@nestjs/common';
-// import { Configuration, OpenAI } from 'openai'; // Corrected import
+import {Injectable} from '@nestjs/common';
+import OpenAI from "openai";
 
-// @Injectable()
-// export class ChatService {
-//   private openAiApi: OpenAI; // Corrected type
+const contextReal = `{
+    source: {
+        lat: 34.0522, // lat of the source location
+        lng: -118.2437, // lng of the source location
+    },
+    target: {
+        lat: 37.7749, // lat of the target location
+        lng: -122.4194, // lat of the target location
+    },
+    radar: {
+        labels: ["Energy", "Risk", "Economic Stability", "Social Responsibility", "Regulatory & Comp.", "Distance", "Success"], // metrics used for the radar diagram
+        datasets: [
+            {
+                label: "Risk",
+                data: [65, 59, 90, 81, 56, 55, 40], // provide data here for the specific target
+            },
+        ],
+    },
+    donut: {
+        labels: ["Risk", "Success"],
+        datasets: [
+            {
+                label: "Risk vs. Success",
+                data: [12, 19], // provide data here for the specific target based on risk and success
+                borderWidth: 1,
+            },
+        ],
+    },
+    newsFeed: [], // Return string of data her about the news feed (this is basically your reference)
+    riskData: {
+        riskName: "Flood Risk", // provide risk name
+        riskCategory: "Environment", // provide risk category
+        description: "Potential flooding due to heavy rainfall.", // provide a description of the risk
+        risks: [], // provide a list of risks DON'T FORGET TO ADD THE RISKS
+        recommendations: "Evacuate flood-prone areas, secure belongings, and stay informed through local news.", // provide a recommendation
+        actions: [] // provide some actions how to mitigate the risks DON'T FORGET TO ADD THE ACTIONS
+    }
+}
+Based on above JSON create a new JSON and fill in the properties with use-cases and don't keep any property empty. Please don't add any introduction text or markdown. I need pure JSON. Make sure JSON is valid. Use the following route: 
+`;
 
-//   constructor() {
-//     // Ensure your OPENAI_API_KEY is set in the environment variables
-//     const apiKey = process.env.OPENAI_API_KEY;
-//     if (!apiKey) {
-//       throw new Error('OPENAI_API_KEY is not set in environment variables.');
-//     }
+async function queryOpenAI(prompt: string): Promise<string> {
+    const openai = new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY,
+        baseURL: "https://llms.azurewebsites.net",
+        defaultHeaders: {
+            "Content-Type": "application/json",
+        }
+    });
 
-//     const configuration = new Configuration({
-//       apiKey: apiKey,
-//     });
+    const chatCompletion = await openai.chat.completions.create({
+        messages: [
+            {
+                role: 'system',
+                content: `${contextReal}`,
+            },
+            {
+                role: 'user',
+                content: prompt,
+            },
+        ],
+        model: 'gpt-4',
+    });
+
+    return chatCompletion.choices[0].message.content;
+}
+
+async function fetchCompletion(prompt) {
+    try {
+        return queryOpenAI(prompt);
+    } catch (error) {
+        console.error("Error fetching completion:", error);
+    }
+}
+
 
 //     this.openAiApi = new OpenAI(configuration); // Correct instantiation
 //   }
@@ -114,22 +175,31 @@
 //   return messages;
 // }
 
-// @Injectable()
-// export class PromptService {
-//   constructor() {}
-//   async analyzeText(text: string): Promise<any> {
-//     try {
-// 		const b = await createStreamChat('bosch-bcx-hack24ber-2311', 'us-central1', 'gemini-1.0-pro-001', text);
-// 		console.log(b);
-// 		return b;
-// 		} catch (err) {
-// 		console.error('error:', err);
-// 		throw new Error(
-// 		  'Failed to analyze text with Watson Natural Language Understanding',
-// 		);
-//   }
-// 	}
-// }
+    async analyzeText2(text: string): Promise<any> {
+        try {
+            const b = await createStreamChat('bosch-bcx-hack24ber-2311', 'us-central1', 'gemini-1.0-pro-001', text);
+            console.log(b);
+            return b;
+        } catch (err) {
+            console.error('error:', err);
+            throw new Error(
+                'Failed to analyze text with Watson Natural Language Understanding',
+            );
+        }
+    }
+
+    async analyzeText(text: string): Promise<any> {
+        try {
+            return fetchCompletion(text);
+        } catch (err) {
+            console.error('error:', err);
+            throw new Error(
+                'Failed to analyze text with Watson Natural Language Understanding',
+            );
+        }
+    }
+}
+
 
 // import { Injectable } from '@nestjs/common';
 

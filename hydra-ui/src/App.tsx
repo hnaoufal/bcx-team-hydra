@@ -44,10 +44,10 @@ const GoogleMapPlaceholder = () => (
 
 
 function App() {
-    const count = useSelector((state: any) => state.counter.value);
     const [prompt, setPrompt] = React.useState('');
     const dispatch = useDispatch();
     const context = useSelector((state: any) => state.counter.text);
+    const isLoading = useSelector((state: any) => state.counter.loading);
     console.log(context);
 
     return (
@@ -80,8 +80,9 @@ function App() {
                         <button
                             className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
                             onClick={() => dispatch(fetchTextData(prompt) as any)}
+                            disabled={isLoading}
                         >
-                            Send
+                            {isLoading ? 'Loading...' : 'Search'}
                         </button>
                     </div>
                     {/* Account icon on the right */}
