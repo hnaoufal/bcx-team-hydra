@@ -41,6 +41,11 @@ npm start
 Visit the server under localhost:3000 (Frontend)
 Visit the server under localhost:4000 (Backend)
 
+## Demo 
+<p align="center">
+  <img src="./media/demo.jpg" alt="Logo">
+</p>
+
 ## Tech Stack
 ![Structure](./media/structure.png)
 
