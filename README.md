@@ -1,5 +1,9 @@
 # AI-powered Geopolitical Risk Assessment Tool
 
+<p align="center">
+  <img src="./media/logo.png" alt="Logo">
+</p>
+
 ## Description
 This project is an AI-powered tool designed to support supply chain risk managers in the identification, assessment, and mitigation of geopolitical risks that could impact supply chain operations.
 
@@ -37,6 +41,9 @@ npm start
 Visit the server under localhost:3000 (Frontend)
 Visit the server under localhost:4000 (Backend)
 
+## Tech Stack
+![Structure](./media/structure.png)
+
 ## Contributing
 We welcome contributions. Please read `CONTRIBUTING.md` for details on our code of conduct and the process for submitting pull requests to us.
 
@@ -49,13 +56,23 @@ This project is licensed under the [LICENSE] - see the file for details.
 
 ## Acknowledgments
 - Jesam Al-Hassan
-- Christian Balzer
+- Christian Baltzer
 - EZ-Zein (IBM)
 
 ## Links / Further Information
-- [GitHub Repository Link]
 - [News Feed]
 - [Further Information]
+
+## Contributors 
+Hicham Naoufal (https://github.com/hnaoufal)  
+Christina Repou (https://github.com/ChrRepou)  
+Elisa Starke (https://github.com/ElisaStarke)  
+Florian Becker (https://github.com/FlancyVR)  
+Christian Meng (https://github.com/Christwelve)  
+
+
+
+
 
 For additional details and updates, please refer to the links provided in the `Further Information` section.
 
